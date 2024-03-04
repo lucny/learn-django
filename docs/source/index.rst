@@ -3,18 +3,20 @@
    You can adapt this file completely to your liking, but it should at least
    contain the root `toctree` directive.
 
-Welcome to Learn Django's documentation!
-========================================
+Nauč se Django
+==============
 Basics
 ======
 
 .. toctree::
    :maxdepth: 2
    :hidden:
-   :caption: Contents:
+   :caption: 1. Framework Django
 
-   options/justlogic
-   options/justcode
+   01/django_introduction
+   01/mvt_architecture
+   01/django_installation
+   01/project_applications
 
 
 
