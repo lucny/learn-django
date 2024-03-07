@@ -5,19 +5,21 @@
 
 Nauč se Django
 ==============
-Basics
-======
 
 .. toctree::
    :maxdepth: 2
    :hidden:
-   :caption: 1. Framework Django
+   :caption: Framework Django
 
-   01/django_introduction
-   01/mvt_architecture
-   01/django_installation
-   01/project_applications
+   01/index
 
+
+.. toctree::
+   :maxdepth: 2
+   :hidden:
+   :caption: Inicializace projektu
+
+   02/index
 
 
 Indices and tables
