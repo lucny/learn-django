@@ -11,7 +11,7 @@ Nauč se Django
    :hidden:
    :caption: Framework Django
 
-   /01/django_introduction
+   /01/index
    /01/mvt_architecture
    /01/django_installation
    /01/project_applications
@@ -22,7 +22,7 @@ Nauč se Django
    :hidden:
    :caption: Inicializace projektu
 
-   /02/zalozeni_projektu   
+   /02/index  
    /02/struktura_projektu
    /02/konfigurace   
 
