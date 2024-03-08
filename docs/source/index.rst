@@ -24,7 +24,8 @@ Nauč se Django
 
    /02/index  
    /02/struktura_projektu
-   /02/konfigurace   
+   /02/konfigurace 
+   /02/migrace-a-administrace  
 
 
 Indices and tables
