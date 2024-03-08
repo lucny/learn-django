@@ -1,12 +1,27 @@
-Konfigurace projektu v Django
-=============================
+Konfigurace projektu
+====================
 
-Konfigurace Django projektu se provádí v souboru `settings.py`. V tomto souboru se nastavují všechny parametry, které se týkají chování aplikace. Nastavení se provádí pomocí proměnných, které se nacházejí v souboru `settings.py`. Některé z těchto proměnných jsou povinné, jiné jsou volitelné. Některé z proměnných se mohou nacházet v souboru `settings.py` přímo, jiné mohou být v souborech, které se importují v `settings.py`.
+Django je framework, který umožňuje vytvářet webové aplikace rychle a snadno. Jednou z výhod tohoto frameworku je, že poskytuje mnoho možností pro konfiguraci, 
+které umožňují přizpůsobit chování aplikace podle potřeb vývojářů. 
+
+Podívejme se na některé z nejdůležitějších konfiguračních možností, které jsou v Django k dispozici.
+
+Soubor `settings.py`
+--------------------
+
+Konfigurace Django projektu se provádí v souboru `settings.py`. V tomto souboru se nastavují všechny parametry, které se týkají chování aplikace. 
+
+Nastavení se provádí pomocí proměnných, které se nacházejí v souboru `settings.py`. 
+Určitá část nastavení je povinná, ostatní jsou volitelná. 
+Některé z proměnných se mohou nacházet v souboru `settings.py` přímo, jiné mohou být v souborech, které se do `settings.py` importují.
 
 Soubor settings.py je rozdělěn do řady sekcí, které se týkají různých částí konfigurace.
 
+Konfigurační proměnné
+---------------------
+
 BASE_DIR
---------
+''''''''
 
 BASE_DIR je proměnná, která uchovává cestu k adresáři, kde je uložen soubor settings.py. To je zpravidla kořenový adresář vašeho Django projektu. Tato proměnná se používá jako výchozí bod pro odvození cest k různým zdrojovým souborům a složkám, jako jsou statické soubory, šablony, databázové soubory atd.
 
@@ -25,7 +40,7 @@ V Django 3.1 a novějších verzích je BASE_DIR nastavena s použitím třídy 
 * ``parent`` je vlastnost třídy Path, která vrací rodičovský adresář dané cesty. Protože settings.py je typicky v adresáři, který je podadresářem kořenového adresáře projektu (např. ``school_library/school_library/settings.py``), použití ``.parent`` dvakrát (``parent.parent``) nám dá cestu k tomu kořenovému adresáři projektu.
 
 Příklady použití:
-'''''''''''''''''
+~~~~~~~~~~~~~~~~~
 
 .. code-block:: python
 
@@ -61,7 +76,7 @@ Tento způsob konfigurace umožňuje snadno a přehledně určit, kde má Django
 
 
 SECRET_KEY
-----------	
+''''''''''		
 
 SECRET_KEY je dlouhý náhodný řetězec, který se používá pro zabezpečení webu. Django jej používá k zajištění, že data uložená v cookies nebo uložená v jiné podobě na straně klienta nejsou snadno čitelná nebo upravitelná. Příklady jeho použití zahrnují:
 
@@ -79,7 +94,7 @@ Generování kryptografických podpisů, které ověřují, že informace v URL 
 
 .. caution:: 
     
-	**Doporučení pro produkční prostředí:**
+    **Doporučení pro produkční prostředí:**
 
  	* Nikdy nevkládejte ``SECRET_KEY`` do verzovacích systémů jako je Git, pokud je tento repozitář veřejně přístupný.
 	* V produkčním prostředí by ``SECRET_KEY`` měl být nastaven na jedinečnou, náhodnou hodnotu a měl by být chráněný.
@@ -87,7 +102,7 @@ Generování kryptografických podpisů, které ověřují, že informace v URL 
   
 
 Příklad nastavení pro produkční prostředí:
-''''''''''''''''''''''''''''''''''''''''''
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 .. code-block:: python
    
@@ -99,7 +114,7 @@ Tento přístup umožňuje, aby v produkčním prostředí byla ``SECRET_KEY`` n
 
 
 DEBUG
------	
+'''''	
 
 ``DEBUG`` je logická (boolean) proměnná, která by měla být nastavena na True pouze během vývoje.
 
@@ -116,7 +131,7 @@ Když je ``DEBUG`` nastavena na ``True``:
 
 .. caution:: 
     
-	**Doporučení pro produkční prostředí:**
+    **Doporučení pro produkční prostředí:**
 
     Když nasazujete aplikaci do produkčního prostředí, je nezbytné nastavit DEBUG na False:
 
@@ -126,7 +141,7 @@ Když je ``DEBUG`` nastavena na ``True``:
     * Je důležité si uvědomit, že zapnutí ``DEBUG`` v produkčním prostředí představuje značné bezpečnostní riziko a mělo by se tomu vždy vyhnout.
 
 Příklad nastavení pro produkční prostředí:
-''''''''''''''''''''''''''''''''''''''''''
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Pro zajištění, že DEBUG je v produkčním prostředí vypnuto, můžete použít:
 
@@ -138,7 +153,7 @@ V tomto případě aplikace načte hodnotu proměnné prostředí ``DJANGO_DEBUG
 
 
 ALLOWED_HOSTS
--------------	
+'''''''''''''	
 
 ``ALLOWED_HOSTS`` je seznam řetězců reprezentujících doménová jména a/nebo IP adresy, které může váš server přijímat. Když Django zpracovává žádost, kontroluje hodnotu HTTP Host hlavičky (kterou může klient libovolně nastavit) a ověří ji proti tomuto seznamu.
 
@@ -152,13 +167,13 @@ Ve výchozím nastavení je seznam prázdný, což je v pořádku během vývoje
 
 .. caution:: 
     
-	**Doporučení pro produkční prostředí:**
+    **Doporučení pro produkční prostředí:**
 
     Před nasazením vašeho projektu do produkčního prostředí byste měli specifikovat, které hostitele může váš server obsloužit. To se dělá vložením doménových jmen a IP adres do seznamu ALLOWED_HOSTS.
 
 
 Příklad nastavení pro produkční prostředí:
-''''''''''''''''''''''''''''''''''''''''''
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Povolení konkrétního hostitele:
 
@@ -185,7 +200,7 @@ V tomto případě je hodnota ``DJANGO_ALLOWED_HOSTS`` načtena z prostředí a 
 
 
 INSTALLED_APPS
---------------	
+''''''''''''''		
 
 ``INSTALLED_APPS`` je seznam obsahující řetězce, které identifikují Django aplikace, které jsou aktivní pro váš projekt. Každá aplikace je zde zastoupena svým plným konfiguračním názvem třídy nebo cestou k modulu aplikace.
 
@@ -222,9 +237,17 @@ Dále je zde uvedena aplikace ``library.apps.LibraryConfig``, což je uživatels
 
 
 MIDDLEWARE
-----------
+''''''''''        
 
-``MIDDLEWARE`` je série háčků (hooks) a globálních funkcí v žádosti/response cyklu. 
+``MIDDLEWARE`` je seznam obsahující řetězce, které identifikují middleware, které má Django použít. 
+
+.. note:: 
+
+    **Middleware** je software, který se nachází mezi webovým serverem a aplikací a může provádět různé operace na HTTP požadavcích a odpovědích. 
+    Příklady operací, které middleware může provádět, zahrnují ověření uživatele, zpracování cookies, zabezpečení, logování, atd. 
+    
+    Část middleware může být vestavěnou součástí Django frameworku, ale můžeme také vytvářet vlastní middleware pro specifické potřeby naší aplikace
+    nebo používat middleware třetích stran.
 
 Zde je seznam standardních middleware tříd, které Django obsahuje:
 
@@ -249,11 +272,13 @@ Zde je seznam standardních middleware tříd, které Django obsahuje:
 - ``django.middleware.clickjacking.XFrameOptionsMiddleware``
   Ochrana proti clickjacking útokům nastavením hlavičky `X-Frame-Options`.
 
-Pro plnou funkcionalitu těchto middleware je nezbytné je mít správně nakonfigurované a poradí v seznamu `MIDDLEWARE` má také význam, protože určuje pořadí, ve kterém jsou middleware aplikovány na každý požadavek/odpověď.
-
+.. caution:: 
+    
+    Pro plnou funkcionalitu těchto middleware je nezbytné je mít správně nakonfigurované a pořadí v seznamu `MIDDLEWARE` má také význam, 
+    protože určuje pořadí, ve kterém jsou middleware aplikovány na každý požadavek/odpověď.
 
 ROOT_URLCONF
-------------
+''''''''''''        
 
 ``ROOT_URLCONF`` je řetězec, který určuje, který soubor bude použit jako kořenový soubor pro URL konfiguraci. Tento soubor obsahuje definice URL adres, které mají být směrovány na jednotlivé pohledy (views) v aplikaci.
 
@@ -265,7 +290,7 @@ Výchozí hodnota je ``'school_library.urls'``, což znamená, že Django bude h
 
 
 TEMPLATES
----------
+'''''''''
 
 ``TEMPLATES`` je seznam konfigurací šablonovacího systému, které Django používá k vykreslování HTML šablon. Každá konfigurace je slovník, který obsahuje různé nastavení pro šablonovací systém. 
 
@@ -300,9 +325,18 @@ Tento adresář je také nastaven jako adresář pro šablony v konfiguraci šab
 
 
 WSGI_APPLICATION
-----------------
+''''''''''''''''
 
-``WSGI_APPLICATION`` je řetězec, který určuje, který soubor bude použit jako WSGI aplikace. WSGI (Web Server Gateway Interface) je standardní rozhraní mezi webovým serverem a webovou aplikací napsanou v Pythonu.
+``WSGI_APPLICATION`` je řetězec, který určuje, který soubor bude použit jako WSGI aplikace. 
+
+.. note:: 
+
+    WSGI (Web Server Gateway Interface) je standardní rozhraní mezi webovým serverem a webovou aplikací napsanou v Pythonu. 
+    WSGI aplikace je objekt, který implementuje rozhraní WSGI a může být spuštěn na webovém serveru, jako je *Apache* nebo *Nginx*. 
+    
+    Proč je vlastně třeba externí WSGI server? Protože Django vývojový server je vhodný pouze pro vývoj, ale není vhodný pro produkční nasazení aplikace.
+    Webový server jako Apache nebo Nginx je schopen obsloužit mnohem větší množství požadavků a je schopen zpracovávat statické soubory a další úkoly, 
+    které Django vývojový server nezvládne.
 
 .. code:: python
 
@@ -313,7 +347,7 @@ Tento soubor bude obsahovat WSGI aplikaci, která bude použita pro nasazení ap
 
 
 DATABASES
----------
+'''''''''
 
 ``DATABASES`` je slovník, který obsahuje konfigurace pro všechny databáze, které vaše aplikace používá. Většinou se používá jedna databáze, ale Django umožňuje používat více databází. 
 Každá konfigurace je slovník, který obsahuje různé nastavení pro připojení k databázi. 
@@ -339,13 +373,23 @@ Některé z klíčů, které můžete použít, jsou:
     }
 
 
-V tomto příkladu je konfigurace databáze nastavena tak, aby Django používal SQLite databázi, která je uložena v souboru ``db.sqlite3`` ve vašem projektu. Tento soubor je určen pomocí proměnné ``BASE_DIR``.
+V tomto příkladu je konfigurace databáze nastavena tak, aby Django používal SQLite databázi, která je uložena v souboru ``db.sqlite3`` ve vašem projektu. 
+Tento soubor je určen pomocí proměnné ``BASE_DIR``.
 
+.. caution:: 
+    
+    V produkčním prostředí byste měli používat robustnější databázi, jako je *PostgreSQL* nebo *MySQL*, protože *SQLite* je vhodná pouze pro vývojové účely.
+
+    SQLite je databáze, která je uložena v jediném souboru a není vhodná pro nasazení aplikace, která bude obsluhovat mnoho uživatelů. 
+    Obsahuje také některá omezení, která mohou způsobit problémy v produkčním prostředí. Například, SQLite nemá podporu pro vícenásobné zápisy, 
+    což může způsobit problémy v prostředí s vysokou zátěží. Také nemá podporu pro některé typy operací, jako je například ALTER TABLE. 
+    
 
 AUTH_PASSWORD_VALIDATORS
-------------------------
+'''''''''''''''''''''''''
 
-``AUTH_PASSWORD_VALIDATORS`` je seznam konfigurací, které určují, jakým způsobem bude ověřováno heslo uživatele. Každá konfigurace je slovník, který obsahuje různé nastavení pro ověřování hesla.
+``AUTH_PASSWORD_VALIDATORS`` je seznam konfigurací, které určují, jakým způsobem bude ověřováno heslo uživatele. 
+Každá konfigurace je slovník, který obsahuje různé nastavení pro ověřování hesla.
 
 Některé z klíčů, které můžete použít, jsou:
 
@@ -396,9 +440,16 @@ V tomto příkladu je konfigurace ověřování hesla nastavena tak, aby Django 
     
 
 LANGUAGE_CODE
--------------
+'''''''''''''
 
-``LANGUAGE_CODE`` je řetězec, který určuje výchozí jazyk, který má být použit pro všechny překlady v aplikaci. Tento řetězec by měl být ve formátu jazyk_kód, například ``'en-us'`` pro angličtinu nebo ``'cs-cz'`` pro češtinu.
+``LANGUAGE_CODE`` je řetězec, určující, který výchozí jazyk má být použit pro všechny překlady v aplikaci. 
+Tento řetězec by měl být ve formátu jazyk_kód, například ``'en-us'`` pro angličtinu nebo ``'cs-cz'`` pro češtinu.
+
+.. note:: 
+
+    Django podporuje mnoho různých jazyků a můžete také vytvářet vlastní překlady (tzv. internacionalizace) pro vaši aplikaci. 
+    Překlady jsou ukládány v souborech s příponou ``.po`` a mohou být vytvořeny pomocí nástroje ``django-admin``. 
+    Struktura souborů s překlady je obvykle organizována do adresářů podle jazyků, například ``locale/en_US/LC_MESSAGES/django.po``.
 
 .. code:: python
 
@@ -408,7 +459,7 @@ V tomto příkladu je výchozí jazyk nastaven na češtinu.
 
 
 TIME_ZONE
----------
+'''''''''
 
 ``TIME_ZONE`` je řetězec, který určuje výchozí časové pásmo, které má být použito pro všechny časové údaje v aplikaci. Tento řetězec by měl být ve formátu kontinent/město, například ``'Europe/Prague'``.
 
@@ -420,9 +471,17 @@ V tomto příkladu je výchozí časové pásmo nastaveno na středoevropský č
 
 
 USE_I18N
---------
+''''''''
 
-``USE_I18N`` je logická (boolean) proměnná, která určuje, zda má být internacionalizace (i18n) povolena. Když je nastavena na ``True``, Django bude hledat překlady pro všechny textové řetězce v aplikaci.
+``USE_I18N`` je logická (boolean) proměnná, která určuje, zda má být internacionalizace (i18n) povolena. 
+Když je nastavena na ``True``, Django bude hledat překlady pro všechny textové řetězce v aplikaci.
+
+.. note:: 
+
+    Internacionalizace je proces přizpůsobení aplikace pro různé jazyky a kultury. 
+    To zahrnuje překlad textových řetězců, formátování dat a času, a další úpravy, které umožňují uživatelům z různých zemí používat aplikaci.
+    V Django můžete internacionalizaci povolit pomocí funkce ``gettext`` a překlady jsou obvykle uloženy v už zmíněných souborech s příponou ``.po``. 
+    Celý proces internacionalizace je velmi dobře zdokumentován v oficiální dokumentaci a je velmi snadný na použití.
 
 .. code:: python
 
@@ -432,9 +491,19 @@ V tomto příkladu je internacionalizace povolena.
 
 
 USE_L10N
---------
+''''''''
 
 ``USE_L10N`` je logická (boolean) proměnná, která určuje, zda má být lokalizace (l10n) povolena. Když je nastavena na ``True``, Django bude používat lokalizované formáty pro datumy a čísla.
+
+.. note:: 
+
+    Lokalizace je proces přizpůsobení aplikace pro různé jazyky a kultury. 
+    
+    Rozdíl mezi internacionalizací a lokalizací je ten, že internacionalizace se zabývá překladem textových řetězců, 
+    zatímco lokalizace se zabývá formátováním dat a času, čísel a měn, atd.
+
+    V Django můžete lokalizaci povolit pomocí funkce ``gettext`` a lokalizované formáty jsou obvykle uloženy v souborech s příponou ``.po``. 
+    
 
 .. code:: python
 
@@ -444,9 +513,17 @@ V tomto příkladu je lokalizace povolena.
 
 
 USE_TZ
-------
+''''''
 
-``USE_TZ`` je logická (boolean) proměnná, která určuje, zda má být časová zóna povolena. Když je nastavena na ``True``, Django bude ukládat časové údaje v UTC a převádět je na místní časové pásmo při vykreslování.
+``USE_TZ`` je logická (boolean) proměnná, která určuje, zda má být časová zóna povolena. 
+Když je nastavena na ``True``, Django bude ukládat časové údaje v UTC a převádět je na místní časové pásmo při vykreslování.
+
+.. note:: 
+    
+    Používání časové zóny je důležité pro aplikace, které mají uživatele z různých časových pásem. 
+    Bez použití časové zóny by mohlo dojít k chybám v časových údajích, protože různá časová pásma mají různé ofsety od UTC.
+    
+    V Django můžete časovou zónu povolit pomocí funkce ``timezone`` a časová zóna je obvykle uložena v souborech s příponou ``.po``.
 
 .. code:: python
 
@@ -456,10 +533,25 @@ V tomto příkladu je časová zóna povolena.
 
 
 STATIC_URL
-----------
+''''''''''
 
-``STATIC_URL`` je řetězec, který určuje URL adresu, pod kterou budou statické soubory dostupné. Tato URL adresa bude použita pro všechny statické soubory, které jsou součástí aplikace. 
+``STATIC_URL`` je řetězec, který určuje URL adresu, pod kterou budou statické soubory dostupné. 
+Tato URL adresa bude použita pro všechny statické soubory, které jsou součástí aplikace. 
 Statické soubory mohou zahrnovat obrázky, CSS soubory, JavaScript soubory, atd. 
+
+.. note:: 
+
+    Statické soubory jsou obvykle umístěny v adresáři ``static`` ve vaší aplikaci a Django je automaticky najde a poskytne je na URL adrese, 
+    která je nastavena v ``STATIC_URL``. Součástí tohoto procesu je také automatické verzování statických souborů, 
+    což znamená, že když se soubor změní, Django automaticky změní URL adresu, aby se zabránilo problémům s cache (vyrovnávací pamětí).
+
+    Příkaz ``python manage.py collectstatic`` je také k dispozici pro sběr všech statických souborů do jednoho místa, což je užitečné pro produkční nasazení aplikace.
+    Provádí to tak, že projde všechny aplikace a sbírá všechny statické soubory do jednoho adresáře, který je určen v ``STATIC_ROOT``.
+
+.. caution::
+
+    V produkčním prostředí byste měli také používat samostatný webový server nebo službu pro doručování statických souborů, jako je *Nginx* nebo *Apache*.
+    Toto je důležité, protože Django vývojový server není vhodný pro obsluhu statických souborů v produkčním prostředí. 
 
 .. code:: python
 
@@ -469,12 +561,36 @@ V tomto příkladu je URL adresa pro statické soubory nastavena na ``'/static/'
 
 
 DEFAULT_AUTO_FIELD
-------------------
+''''''''''''''''''
 
-``DEFAULT_AUTO_FIELD`` je řetězec, který určuje, jaký typ pole bude použit jako primární klíč pro nové modely. Tento řetězec by měl být ve formátu ``'app_label.ModelName.field_name'``, kde ``app_label`` je název aplikace, ``ModelName`` je název modelu a ``field_name`` je název pole.
+``DEFAULT_AUTO_FIELD`` je řetězec, který určuje, jaký typ pole bude použit jako primární klíč pro nové modely. 
+Tento řetězec by měl být ve formátu ``'app_label.ModelName.field_name'``, kde ``app_label`` je název aplikace, 
+``ModelName`` je název modelu a ``field_name`` je název pole.
+
+.. note:: 
+
+    Primární klíč je unikátní identifikátor pro každý záznam v databázi a je obvykle používán pro vyhledávání a spojování dat. 
+    Většinou je to pole s názvem ``id``, které je automaticky vytvořeno pro každý model, ale můžete také použít jiný typ pole, jako je například ``BigAutoField``.
+
+    ``BigAutoField`` je vhodný pro databáze, které podporují velká čísla, jako je například *PostgreSQL* nebo *MySQL*.
 
 .. code:: python
 
     DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-V tomto příkladu je primární klíč pro nové modely nastaven na ``BigAutoField``. Tento typ pole je vhodný pro databáze, které podporují velká čísla.
+V tomto příkladu je primární klíč pro nové modely nastaven na ``BigAutoField``.
+
+
+Úprava nastavení projektu
+-------------------------
+
+Většina výchozích nastavení proměnných v souboru ``settings.py`` je vhodná i pro náš projekt. Provedeme pouze změnu těch proměnných, 
+které se týkají jazyka a časové zóny. 
+
+.. code:: python
+    
+    LANGUAGE_CODE = 'cs-cz'
+    TIME_ZONE = 'Europe/Prague'
+
+
+Vše ostatní zatím ponecháme v původním stavu. V dalších kapitolách se budeme věnovat dalším konfiguracím, které budou souviset s konkrétními částmi naší aplikace.
