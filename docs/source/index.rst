@@ -29,6 +29,15 @@ Nauč se Django
    /02/git_a_github 
 
 
+.. toctree::
+   :maxdepth: 2
+   :hidden:
+   :caption: Modely a databáze
+
+   /03/index
+   /03/datovy_model  
+
+
 Indices and tables
 ==================
 
