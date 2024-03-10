@@ -35,7 +35,8 @@ Nauč se Django
    :caption: Modely a databáze
 
    /03/index
-   /03/datovy_model  
+   /03/datovy_model 
+   /03/upravy_modelu 
 
 
 Indices and tables
