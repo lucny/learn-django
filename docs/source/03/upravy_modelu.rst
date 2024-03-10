@@ -88,6 +88,7 @@ Upravíme tedy náš soubor `models.py` takto:
                                                 error_messages={'min_value': 'Minimální rok vydání je 1500',
                                                                 'max_value': 'Maximální rok vydání je 2100'},
                                                 help_text='Zadejte rok vydání knihy (1500 - 2100)')
+        obalka = models.ImageField(upload_to='obalky/', blank=True, null=True, verbose_name='Obálka knihy')                                        
         autor = models.ManyToManyField(Autor, verbose_name='Autor/autoři knihy', help_text='Vyberte autora/autory knihy',
                                     error_messages={'null': 'Vyberte autora/autory knihy',
                                                     'blank': 'Autor nesmí být prázdný'})
