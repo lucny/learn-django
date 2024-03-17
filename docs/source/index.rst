@@ -13,8 +13,6 @@ Nauč se Django
 
    /01/index
    /01/mvt_architecture
-   /01/django_installation
-   /01/project_applications
 
 
 .. toctree::
